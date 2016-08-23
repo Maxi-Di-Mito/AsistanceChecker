@@ -1,4 +1,4 @@
-package com.example.maximilianodimito.asistancechecker.Helper;
+package com.example.maximilianodimito.asistancechecker.helper;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
@@ -8,7 +8,7 @@ import java.util.Locale;
 /**
  * Created by maximiliano.dimito on 8/19/2016.
  */
-public class CalendarHelper {
+public final class CalendarHelper {
 
     public static String getMonthName(Date d)
     {

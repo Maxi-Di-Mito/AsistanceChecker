@@ -1,4 +1,4 @@
-package com.example.maximilianodimito.asistancechecker.Helper;
+package com.example.maximilianodimito.asistancechecker.helper;
 
 import com.example.maximilianodimito.asistancechecker.service.WebService;
 
