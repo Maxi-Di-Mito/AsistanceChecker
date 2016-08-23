@@ -7,15 +7,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_centerHorizontal="true"
     android:orientation="vertical"
     tools:context="com.example.maximilianodimito.asistancechecker.MainActivity">
 
 
     <TextView
-        android:id="@+id/monthText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/monthText"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10px"
+        />
+
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/compactcalendar_view"
@@ -31,19 +37,12 @@
         app:compactCalendarMultiEventIndicatorColor="#fff"
         />
 
-
-
-
-    <TextView
-        android:layout_width="wrap_content"
+    <ListView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/personList">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
+    </ListView>
 
 
 </LinearLayout>
