@@ -10,10 +10,12 @@ public class Person {
     private String name;
     @SerializedName("lastName")
     private String lastName;
+    @SerializedName("_id")
+    private String _id;
 
     @Override
     public String toString() {
-        return lastName+", "+name;
+        return this.lastName+", "+this.name;
     }
 
     public String getName() {
@@ -24,7 +26,6 @@ public class Person {
         this.name = name;
     }
 
-
     public String getLastName() {
         return lastName;
     }
@@ -32,4 +33,8 @@ public class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String get_id() {return _id;}
+
+    public void set_id(String _id) {this._id = _id;}
 }

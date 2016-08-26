@@ -7,13 +7,13 @@ import java.util.List;
 /**
  * Created by maximiliano.dimito on 8/23/2016.
  */
-public class PersonResponse {
+public class AsistanceResponse {
 
     @SerializedName("response")
     private boolean response;
 
-    @SerializedName("persons")
-    private List<Person> persons;
+    @SerializedName("asistances")
+    private List<Asistance> asistances;
 
 
     public boolean getResponse() {
@@ -24,11 +24,11 @@ public class PersonResponse {
         this.response = response;
     }
 
-    public List<Person> getPersons() {
-        return persons;
+    public List<Asistance> getAsistances() {
+        return asistances;
     }
 
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
+    public void setPersons(List<Asistance> asistances) {
+        this.asistances = asistances;
     }
 }

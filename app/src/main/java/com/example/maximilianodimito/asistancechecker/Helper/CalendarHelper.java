@@ -1,6 +1,7 @@
 package com.example.maximilianodimito.asistancechecker.helper;
 
 import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -19,4 +20,9 @@ public final class CalendarHelper {
         return dfs.getMonths()[m];
     }
 
+    public static String dateToString(Date d)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault());
+        return sdf.format(d);
+    }
 }

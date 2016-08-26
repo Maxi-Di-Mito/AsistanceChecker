@@ -1,5 +1,6 @@
 package com.example.maximilianodimito.asistancechecker.modules.dashboard;
 
+import com.example.maximilianodimito.asistancechecker.model.Asistance;
 import com.example.maximilianodimito.asistancechecker.model.Person;
 
 import java.util.List;
@@ -9,6 +10,6 @@ import java.util.List;
  */
 public interface DashBoardView {
 
-    void setPersonsList(List<Person> persons);
+    void setAsistancesList(List<Asistance> persons);
 
 }

@@ -1,7 +1,8 @@
 package com.example.maximilianodimito.asistancechecker.modules.dashboard;
 
+import com.example.maximilianodimito.asistancechecker.helper.CalendarHelper;
 import com.example.maximilianodimito.asistancechecker.helper.ServiceFactory;
-import com.example.maximilianodimito.asistancechecker.model.PersonResponse;
+import com.example.maximilianodimito.asistancechecker.model.AsistanceResponse;
 
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DashBoardPresenter implements  Callback<PersonResponse> {
+public class DashBoardPresenter {
 
     private DashBoardView view;
 
@@ -23,25 +24,25 @@ public class DashBoardPresenter implements  Callback<PersonResponse> {
     }
 
 
-    public void loadPersonsForDay(Date day)
+    public void loadAsistancesPersonsForDay(Date day)
     {
-        Call<PersonResponse> call = ServiceFactory.getWebService().getPersons();
-        call.enqueue(this);
+        Call<AsistanceResponse> call = ServiceFactory.getWebService().getAsistancesByDate(CalendarHelper.dateToString(day));
+        call.enqueue(new Callback<AsistanceResponse>() {
+            @Override
+            public void onResponse(Call<AsistanceResponse> call, final Response<AsistanceResponse> response) {
+                if(response.isSuccessful() && response.body().getResponse())
+                {
+                    view.setAsistancesList(response.body().getAsistances());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AsistanceResponse> call, Throwable t) {
+
+            }
+        });
     }
 
-    // Calback
-    @Override
-    public void onResponse(Call<PersonResponse> call, final Response<PersonResponse> response) {
-        if(response.isSuccessful() && response.body().getResponse())
-        {
-            view.setPersonsList(response.body().getPersons());
-        }
-    }
-
-    @Override
-    public void onFailure(Call<PersonResponse> call, Throwable t) {
-
-    }
 
     public static DashBoardPresenter getInstance(DashBoardView dashBoardView) {
         return new DashBoardPresenter(dashBoardView);

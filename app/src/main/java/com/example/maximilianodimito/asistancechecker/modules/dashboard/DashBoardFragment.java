@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.maximilianodimito.asistancechecker.R;
 import com.example.maximilianodimito.asistancechecker.helper.CalendarHelper;
+import com.example.maximilianodimito.asistancechecker.model.Asistance;
 import com.example.maximilianodimito.asistancechecker.model.Person;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 
@@ -36,7 +37,6 @@ public class DashBoardFragment extends Fragment implements DashBoardView, Compac
     private final DashBoardPresenter presenter = DashBoardPresenter.getInstance(this);
     private  ArrayAdapter<String> itemsAdapter;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,32 +53,31 @@ public class DashBoardFragment extends Fragment implements DashBoardView, Compac
         return view;
     }
 
-
     @Override
-    public void setPersonsList(final List<Person> persons) {
+    public void setAsistancesList(final List<Asistance> asistances) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 itemsAdapter.clear();
-                for(Person p: persons)
+                for(Asistance a : asistances)
                 {
-                    itemsAdapter.add(p.toString());
+                    itemsAdapter.add(a.getPerson().toString());
                 }
                 itemsAdapter.notifyDataSetChanged();
             }
         });
     }
 
-
     //////// CompatCalendarViewListener
     @Override
     public void onDayClick(Date dateClicked) {
-        presenter.loadPersonsForDay(dateClicked);
+        presenter.loadAsistancesPersonsForDay(dateClicked);
     }
 
     @Override
     public void onMonthScroll(Date firstDayOfNewMonth) {
         monthText.setText(CalendarHelper.getMonthName(firstDayOfNewMonth));
+        presenter.loadAsistancesPersonsForDay(firstDayOfNewMonth);
     }
 
 
