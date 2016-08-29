@@ -12,7 +12,7 @@ import retrofit2.http.Path;
  */
 public interface WebService {
 
-    public String baseUrl = "http://10.0.0.107:8080/api/";
+    public String baseUrl = "https://asistancechecker.herokuapp.com/api/";
 
 
     //List<Asistance> getAsistanceForDay(Date d);
