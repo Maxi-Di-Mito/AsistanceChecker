@@ -7,14 +7,16 @@ import com.example.maximilianodimito.asistancechecker.modules.dashboard.DashBoar
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.main_layout,new DashBoardFragment())
+                .add(R.id.content_frame,new DashBoardFragment())
                 .commit();
     }
 }

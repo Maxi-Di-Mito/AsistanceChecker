@@ -1,9 +1,16 @@
 package com.example.maximilianodimito.asistancechecker.modules.dashboard;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +20,12 @@ import android.widget.TextView;
 
 import com.example.maximilianodimito.asistancechecker.R;
 import com.example.maximilianodimito.asistancechecker.helper.CalendarHelper;
+import com.example.maximilianodimito.asistancechecker.helper.RecyclerViewAdapter;
 import com.example.maximilianodimito.asistancechecker.model.Asistance;
 import com.example.maximilianodimito.asistancechecker.model.Person;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,24 +39,27 @@ public class DashBoardFragment extends Fragment implements DashBoardView, Compac
 
     @BindView(R.id.compactcalendar_view)
     CompactCalendarView calendar;
-    @BindView(R.id.monthText)
-    TextView monthText;
     @BindView(R.id.personList)
-    ListView personList;
+    RecyclerView personList;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private final DashBoardPresenter presenter = DashBoardPresenter.getInstance(this);
-    private  ArrayAdapter<String> itemsAdapter;
+    private RecyclerViewAdapter itemsAdapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dashboard_layout, container, false);
         ButterKnife.bind(this,view);
+        toolbar.setTitle(StringUtils.capitalize(CalendarHelper.getMonthName(new Date())));
+        //((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-        monthText.setText(CalendarHelper.getMonthName(new Date()));
 
-        itemsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,new ArrayList<String>());
+        itemsAdapter = new RecyclerViewAdapter(new ArrayList<String>(),getContext());
         personList.setAdapter(itemsAdapter);
+        personList.setLayoutManager(new LinearLayoutManager(getContext()));
+        personList.setHasFixedSize(true);
 
         calendar.setListener(this);
 
@@ -76,7 +89,7 @@ public class DashBoardFragment extends Fragment implements DashBoardView, Compac
 
     @Override
     public void onMonthScroll(Date firstDayOfNewMonth) {
-        monthText.setText(CalendarHelper.getMonthName(firstDayOfNewMonth));
+        toolbar.setTitle(StringUtils.capitalize(CalendarHelper.getMonthName(firstDayOfNewMonth)));
         presenter.loadAsistancesPersonsForDay(firstDayOfNewMonth);
     }
 
